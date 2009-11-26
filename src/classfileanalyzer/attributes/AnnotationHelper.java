@@ -10,6 +10,7 @@ package classfileanalyzer.attributes;
 
 
 import classfileanalyzer.*;
+
 import java.util.*;
 import static classfileanalyzer.Main.lt;
 
@@ -53,7 +54,7 @@ public class AnnotationHelper implements Constants {
     
     
     
-    public void annotation() {
+    public void annotation() throws ClassFormatError {
         
         // ANNOTATION_DEFAULT switch
         if ((annotationPolicy != ANNOTATION_DEFAULT) || (nestedAnnotation == true)) {
@@ -182,7 +183,7 @@ public class AnnotationHelper implements Constants {
     
     
     
-    public void element_value(int tag) {
+    public void element_value(int tag) throws ClassFormatError {
                
         int const_value_index;
         int type_name_index;
@@ -502,8 +503,8 @@ public class AnnotationHelper implements Constants {
                     int tagArray = annotations[pointerAnnotations];
                     pointerAnnotations = pointerAnnotations + 1; 
                     if (tagArray != tag) {
-                        System.out.println("Clara: internal error, annotation, array_value!");
-                        System.exit(1);
+                        throw new ClassFormatError(
+                                "Clara: internal error, annotation, array_value!");
                     }
                 }
                 element_value(tag);

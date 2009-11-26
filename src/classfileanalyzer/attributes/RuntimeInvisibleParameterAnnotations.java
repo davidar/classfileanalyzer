@@ -35,7 +35,7 @@ public class RuntimeInvisibleParameterAnnotations implements Constants {
    
     public RuntimeInvisibleParameterAnnotations(int[] RuntimeInvisibleParameterAnnotations_attribute, 
                                                 ConstantPool cp, 
-                                                int indent) {
+                                                int indent) throws ClassFormatError {
         this.RuntimeInvisibleParameterAnnotations_attribute = RuntimeInvisibleParameterAnnotations_attribute;
         this.cp = cp;
         this.indent = indent;
@@ -47,7 +47,7 @@ public class RuntimeInvisibleParameterAnnotations implements Constants {
     
     
     
-    public void parse() {
+    public void parse() throws ClassFormatError {
         attribute_name_index = (RuntimeInvisibleParameterAnnotations_attribute[0] << 8)  | 
                                 RuntimeInvisibleParameterAnnotations_attribute[1];
         attribute_length =     (RuntimeInvisibleParameterAnnotations_attribute[2] << 24) | 
