@@ -115,7 +115,12 @@ public class Main {
         } else {
             clazz = new ClassFile(jarName, fileName);
         }
-        clazz.parse();
+        try {
+            clazz.parse();
+        } catch (ClassFormatError e) {
+            System.out.println(e.toString());
+            System.exit(1);
+        }
         
         // dump additional informations
         if (info) {
@@ -141,18 +146,23 @@ public class Main {
         Fields fds = clazz.getFields();
         Methods mds = clazz.getMethods();
         Attributes aes = clazz.getAttributes();
-                
+        
         Builder builder = new Builder();
-        builder.buildHeader(minor_version, 
-                            major_version, 
-                            cp,
-                            access_flags, 
-                            this_class, 
-                            super_class,
-                            ifs,
-                            aes);
-        builder.buildFields(fds, cp);
-        builder.buildMethods(mds, cp);
+        try {
+            builder.buildHeader(minor_version, 
+                                major_version, 
+                                cp,
+                                access_flags, 
+                                this_class, 
+                                super_class,
+                                ifs,
+                                aes);
+            builder.buildFields(fds, cp);
+            builder.buildMethods(mds, cp);
+        } catch (ClassFormatError e) {
+            System.out.println(e.toString());
+            System.exit(1);
+        }
                 
         StringBuffer assemblerSourceText = builder.getAssemblerSourceText();
         if (file) {

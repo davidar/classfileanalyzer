@@ -9,7 +9,6 @@
 package classfileanalyzer.util;
 
 
-import java.io.*;
 import static classfileanalyzer.Main.lt;
 
 

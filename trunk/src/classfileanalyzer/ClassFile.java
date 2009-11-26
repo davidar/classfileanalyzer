@@ -9,9 +9,7 @@
 package classfileanalyzer;
 
 
-import classfileanalyzer.util.*;
 import java.io.*;
-import java.util.*;
 import java.util.jar.*;
 
 
@@ -119,6 +117,19 @@ public class ClassFile {
     
     
     
+    public ClassFile(String fileName, byte[] data) {
+        this(); // invoke constructor ClassFile()
+        this.fileLength = data.length;
+        this.classBytes = new int[fileLength];
+        this.fileName = fileName;
+        for(int i = 0; i < data.length; i++)
+            classBytes[i] = ((int)data[i])&0xff;
+    }
+    
+    
+    
+    
+    
     public ClassFile(String jarName, String fileName) {
         this(); // invoke constructor ClassFile()
         this.fileName = fileName;
@@ -151,7 +162,7 @@ public class ClassFile {
     
     
     
-    public void parse() {
+    public void parse() throws ClassFormatError {
         magic[0] = classBytes[0];
         magic[1] = classBytes[1];
         magic[2] = classBytes[2];
@@ -161,9 +172,8 @@ public class ClassFile {
              (magic[1] != 0xfe) ||
              (magic[2] != 0xba) ||
              (magic[3] != 0xbe) ) {
-            System.out.println("ClassFileAnalyzer Error: " + 
+            throw new ClassFormatError(
                     "No Java class file, magic number invalid.");
-            System.exit(1);
         }
         
         minor_version[0] = classBytes[4];

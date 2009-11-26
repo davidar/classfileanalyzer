@@ -35,7 +35,7 @@ public class RuntimeVisibleParameterAnnotations implements Constants {
     
     public RuntimeVisibleParameterAnnotations(int[] RuntimeVisibleParameterAnnotations_attribute, 
                                               ConstantPool cp, 
-                                              int indent) {
+                                              int indent) throws ClassFormatError {
         this.RuntimeVisibleParameterAnnotations_attribute = RuntimeVisibleParameterAnnotations_attribute;
         this.cp = cp;
         this.indent = indent;
@@ -47,7 +47,7 @@ public class RuntimeVisibleParameterAnnotations implements Constants {
     
     
     
-    public void parse() {
+    public void parse() throws ClassFormatError {
         attribute_name_index = (RuntimeVisibleParameterAnnotations_attribute[0] << 8)  | 
                                 RuntimeVisibleParameterAnnotations_attribute[1];
         attribute_length =     (RuntimeVisibleParameterAnnotations_attribute[2] << 24) | 

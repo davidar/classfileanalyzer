@@ -10,7 +10,6 @@ package classfileanalyzer.attributes;
 
 
 import classfileanalyzer.*;
-import java.util.*;
 
 
 
@@ -34,7 +33,7 @@ public class RuntimeInvisibleAnnotations implements Constants {
     
     public RuntimeInvisibleAnnotations(int[] RuntimeInvisibleAnnotations_attribute, 
                                        ConstantPool cp, 
-                                       int indent) {
+                                       int indent) throws ClassFormatError {
         this.RuntimeInvisibleAnnotations_attribute = RuntimeInvisibleAnnotations_attribute;
         this.cp = cp;
         this.indent = indent;
@@ -46,7 +45,7 @@ public class RuntimeInvisibleAnnotations implements Constants {
     
     
     
-    public void parse() {
+    public void parse() throws ClassFormatError {
         attribute_name_index = (RuntimeInvisibleAnnotations_attribute[0] << 8)  | 
                                 RuntimeInvisibleAnnotations_attribute[1];
         attribute_length =     (RuntimeInvisibleAnnotations_attribute[2] << 24) | 

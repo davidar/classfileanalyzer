@@ -15,7 +15,7 @@ package classfileanalyzer;
 public class Version {
       
     protected static final String majorVersion =  "0";
-    protected static final String minorVersion =  "7";
+    protected static final String minorVersion =  "8";
     protected static final String updateVersion = "0";
     
     protected static final String addVersion =    "";

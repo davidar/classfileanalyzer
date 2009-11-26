@@ -31,7 +31,7 @@ public class AnnotationDefault implements Constants {
     
     
     
-    public AnnotationDefault(int[] AnnotationDefault_attribute, ConstantPool cp, int indent) {
+    public AnnotationDefault(int[] AnnotationDefault_attribute, ConstantPool cp, int indent) throws ClassFormatError {
         this.AnnotationDefault_attribute = AnnotationDefault_attribute;
         this.cp = cp;
         this.indent = indent;
@@ -43,7 +43,7 @@ public class AnnotationDefault implements Constants {
     
     
     
-    public void parse() {
+    public void parse() throws ClassFormatError {
         int i;
         
         attribute_name_index = (AnnotationDefault_attribute[0] << 8)  | 

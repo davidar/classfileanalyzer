@@ -10,6 +10,7 @@ package classfileanalyzer.attributes;
 
 
 import classfileanalyzer.*;
+
 import java.util.*;
 import static classfileanalyzer.Main.lt;
 
@@ -43,7 +44,7 @@ public class Code implements Constants {
     
     
     
-    public Code(int[] Code_attribute, ConstantPool cp) {
+    public Code(int[] Code_attribute, ConstantPool cp) throws ClassFormatError {
         this.Code_attribute = Code_attribute;
         this.cp = cp;
         sourceText = new StringBuffer();
@@ -55,7 +56,7 @@ public class Code implements Constants {
     
     
     
-    public void parse() {
+    public void parse() throws ClassFormatError {
              
         int i;
         int tag;
@@ -636,8 +637,7 @@ public class Code implements Constants {
             }
                        
             if (operandCount == -2) { // instructions: xxxunusedxxx, breakpoint
-                System.out.println("Error: opcode, operand bytes.");
-                System.exit(1);
+                throw new ClassFormatError("Error: opcode, operand bytes.");
             }
            
             sourceText.append(lt);
